@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "webpack-dev-server --mode development",
+    "build": "webpack --mode development"
+  },
   "dependencies": {
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
@@ -16,6 +20,7 @@
   },
   "devDependencies": {
     "css-loader": "^3.6.0",
+    "file-loader": "^6.0.0",
     "style-loader": "^1.2.1",
     "webpack-dev-server": "^3.11.0"
   }
