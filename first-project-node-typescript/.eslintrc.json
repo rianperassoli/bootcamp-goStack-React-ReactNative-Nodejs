@@ -24,7 +24,6 @@
   ],
   "rules": {
     "prettier/prettier": "error",
-    "prettier.semi": false,
     "import/extensions": [
       "error",
       "ignorePackages",
