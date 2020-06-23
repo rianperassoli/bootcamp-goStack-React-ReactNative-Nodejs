@@ -30,7 +30,7 @@ appointmentsRouter.post("/", (request, response) => {
     date: parsedDate,
   });
 
-  response.json(appointment);
+  return response.json(appointment);
 });
 
 export default appointmentsRouter;
