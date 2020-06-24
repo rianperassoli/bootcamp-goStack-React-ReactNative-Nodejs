@@ -33,6 +33,7 @@
       2,
       "never"
     ],
+    "camelcase": ["error", {"properties": "never"}]
     "class-methods-use-this": "off",
     "import/extensions": [
       "error",
