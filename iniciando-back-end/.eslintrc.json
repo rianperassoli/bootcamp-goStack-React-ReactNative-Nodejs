@@ -23,7 +23,17 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "semi": false
+      }
+    ],
+    "semi": [
+      2,
+      "never"
+    ],
+    "class-methods-use-this": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
