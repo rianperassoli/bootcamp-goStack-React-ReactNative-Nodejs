@@ -29,11 +29,12 @@
         "semi": false
       }
     ],
+    "@typescript-eslint/camelcase": "off",
+    "camelcase": "off",
     "semi": [
       2,
       "never"
     ],
-    "camelcase": ["error", {"properties": "never"}],
     "class-methods-use-this": "off",
     "import/extensions": [
       "error",
