@@ -1,59 +1,66 @@
-import React from 'react'
+import React, { useState, FormEvent } from 'react'
 import { FiChevronRight } from 'react-icons/fi'
+import api from '../../services/api'
 
 import logo from '../../assets/logo.svg'
-
 import { Title, Form, Repositories } from './styles'
 
+interface GithubRepository {
+  full_name: string
+  description: string
+  owner: {
+    login: string
+    avatar_url: string
+  }
+}
+
 const Dashboard: React.FC = () => {
+  const [newRepository, setNewRepository] = useState('')
+  const [repositories, setRepositories] = useState<GithubRepository[]>([])
+
+  const handleAddRepository = async (
+    event: FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
+    event.preventDefault()
+
+    const response = await api.get<GithubRepository>(`repos/${newRepository}`)
+
+    const repository = response.data
+
+    setRepositories([...repositories, repository])
+
+    setNewRepository('')
+  }
+
   return (
     <>
       <img src={logo} alt="Github Explorer" />
       <Title>Explore repositórios do github</Title>
 
-      <Form>
-        <input placeholder="Digite o nome do repositório" />
+      <Form onSubmit={handleAddRepository}>
+        <input
+          placeholder="Digite o nome do repositório"
+          value={newRepository}
+          onChange={event => setNewRepository(event.target.value)}
+        />
         <button type="submit">Pesquisar</button>
       </Form>
 
       <Repositories>
-        <a href="testse">
-          <img
-            src="https://avatars2.githubusercontent.com/u/4731098?s=460&u=eeca98d6254c745fc63fd8e70a702d47f95d2edf&v=4"
-            alt="Rian Perassoli"
-          />
-          <div>
-            <strong>rocketseat/unform</strong>
-            <p>Easy peasy highly scalable ReactJS & React Native forms!</p>
-          </div>
+        {repositories.map(repository => (
+          <a key={repository.full_name} href="testse">
+            <img
+              src={repository.owner.avatar_url}
+              alt={repository.owner.login}
+            />
+            <div>
+              <strong>{repository.full_name}</strong>
+              <p>{repository.description}</p>
+            </div>
 
-          <FiChevronRight size={20} />
-        </a>
-
-        <a href="testse">
-          <img
-            src="https://avatars2.githubusercontent.com/u/4731098?s=460&u=eeca98d6254c745fc63fd8e70a702d47f95d2edf&v=4"
-            alt="Rian Perassoli"
-          />
-          <div>
-            <strong>rocketseat/unform</strong>
-            <p>Easy peasy highly scalable ReactJS & React Native forms!</p>
-          </div>
-
-          <FiChevronRight size={20} />
-        </a>
-        <a href="testse">
-          <img
-            src="https://avatars2.githubusercontent.com/u/4731098?s=460&u=eeca98d6254c745fc63fd8e70a702d47f95d2edf&v=4"
-            alt="Rian Perassoli"
-          />
-          <div>
-            <strong>rocketseat/unform</strong>
-            <p>Easy peasy highly scalable ReactJS & React Native forms!</p>
-          </div>
-
-          <FiChevronRight size={20} />
-        </a>
+            <FiChevronRight size={20} />
+          </a>
+        ))}
       </Repositories>
     </>
   )
