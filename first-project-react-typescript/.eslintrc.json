@@ -45,6 +45,12 @@
       2,
       "never"
     ],
+    "@typescript-eslint/explicit-function-return-type":[
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
